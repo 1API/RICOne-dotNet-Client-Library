@@ -9,7 +9,7 @@
 namespace RicOneApi.Models.Authentication
 {
     /// <summary>
-    /// Endpoint type contatins enpoint name, href, and token
+    /// Endpoint type contains endpoint name, href, and token
     /// </summary>
     public class Endpoint
     {

@@ -49,6 +49,7 @@ const string clientSecret = "YOUR PASSWORD";
     * /xEmployments
     * /xLeas/{refId}/xEmployments
     * /xSchool/{refId}/xEmployments
+* Updated Authenticator to better handle token expiration.
 
 ### v1.7.0
 * Upgraded project to build in .NET 4.6.
@@ -56,7 +57,7 @@ const string clientSecret = "YOUR PASSWORD";
   * RestSharp - 106.6.9.0
   * Newtonsoft.Json - 12.0.0.0
   * JWT - 5.0.0.0
-* Removed depricated fields from XRosterType.
+* Removed deprecated fields from XRosterType.
     * sessionCode - use sessionCode in XMeetingTimeType
     * schoolCalendarRefId - use schoolCalendarRefId XMeetingTimeType
 * Added School Year to all xPress types.

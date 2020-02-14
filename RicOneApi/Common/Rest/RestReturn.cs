@@ -8,8 +8,8 @@ using System.Linq;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.7.0
- * Since       2019-04-18
+ * Version     1.8.0
+ * Since       2020-02-12
  */
 namespace RicOneApi.Common.Rest
 {
@@ -28,7 +28,7 @@ namespace RicOneApi.Common.Rest
         /// <returns>Multiple object response for a REST call.</returns>
         internal ResponseMulti<E> MakeAllRequest<E,T>(RestClient rc, RestProperties rp) where T : ICollectionType<E,T>, new()
         {
-            CheckToken(rc);
+            Authenticator.Instance.RefreshToken(Authenticator.Instance.GetToken(), rc);
 
             ResponseMulti<E> output = new ResponseMulti<E>();
             RestRequest request = RequestBuilder(rp);
@@ -72,7 +72,7 @@ namespace RicOneApi.Common.Rest
         /// <returns>Single object response for a REST call.</returns>
         internal ResponseSingle<E> MakeSingleRequest<E,T>(RestClient rc, RestProperties rp) where T : ICollectionType<E,T>, new()
         {
-            CheckToken(rc);
+            Authenticator.Instance.RefreshToken(Authenticator.Instance.GetToken(), rc);
 
             ResponseSingle<E> output = new ResponseSingle<E>();
             RestRequest request = RequestBuilder(rp);
@@ -160,26 +160,5 @@ namespace RicOneApi.Common.Rest
         /// Accessor method that holds navigation last page integer value.
         /// </summary>
         internal int NavigationLastPage { get; set; }
-
-        /// <summary>
-        /// Validate whether current token is expired. If expired, re-authenticate and use new valid token.
-        /// </summary>
-        /// <param name="rc">REST client.</param>
-        private void CheckToken(RestClient rc)
-        {
-            DecodedToken dt = new DecodedToken(Authenticator.Instance.GetToken());
-
-            if (DateTime.Now >= Util.ConvertUnixTime(dt.GetDecodedToken().exp))
-            {
-                Authenticator.Instance.SetMessage("EXPIRED");
-                Authenticator.Instance.RefreshToken();
-                rc.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(Authenticator.Instance.GetToken(), "Bearer");
-            }
-            else
-            {
-                Authenticator.Instance.SetMessage("VALID");
-                rc.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(Authenticator.Instance.GetToken(), "Bearer");
-            }
-        }
     }
 }

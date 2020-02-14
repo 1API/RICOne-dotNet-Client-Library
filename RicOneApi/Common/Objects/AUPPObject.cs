@@ -19,10 +19,10 @@ namespace RicOneApi.Common.Objects
         private string baseApiUrl;
 
         /// <summary>
-        /// AUPP Object Contstructor.
+        /// AUPP Object Constructor.
         /// </summary>
         /// <param name="rc">REST client.</param>
-        /// <param name="baseApiUrl">Base API url.</param>
+        /// <param name="baseApiUrl">Base API URL.</param>
         internal AUPPObject(RestClient rc, string baseApiUrl)
         {
             this.rc = rc;

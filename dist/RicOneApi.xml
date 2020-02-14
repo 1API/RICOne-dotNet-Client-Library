@@ -18,7 +18,7 @@
             <summary>
             Establish connection to authenticate to OAuth server.
             </summary>
-            <param name="authUrl">The authentication server url.</param>
+            <param name="authUrl">The authentication server URL.</param>
             <param name="clientId">The clientId for the application.</param>
             <param name="clientSecret">The clientSecret for the application.</param>
         </member>
@@ -29,7 +29,7 @@
             <param name="clientId">The clientId for the application.</param>
             <param name="clientSecret">The clientSecret for the application.</param>
         </member>
-        <member name="M:RicOneApi.Api.Authenticator.RefreshToken">
+        <member name="M:RicOneApi.Api.Authenticator.RefreshToken(System.String,RestSharp.RestClient)">
             <summary>
             Re-authenticates with authentication server if token is expired.
             </summary>
@@ -1115,7 +1115,7 @@
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXCoursesByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
-            Request xCourses associated to a specific xLea by refId wtih paging.
+            Request xCourses associated to a specific xLea by refId with paging.
             </summary>
             <param name="refId">RefId of xLeas.</param>
             <param name="navigationPage">Page to retrieve.</param>
@@ -1540,7 +1540,7 @@
         </member>
         <member name="M:RicOneApi.Api.XPress.GetXRostersByXStudent(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
-            Request xRosters associated to a specific xStudent by refId wtih paging.
+            Request xRosters associated to a specific xStudent by refId with paging.
             </summary>
             <param name="refId">RefId of xStudents.</param>
             <param name="navigationPage">Page to retrieve.</param>
@@ -2779,10 +2779,10 @@
         </member>
         <member name="M:RicOneApi.Common.Objects.AUPPObject.#ctor(RestSharp.RestClient,System.String)">
             <summary>
-            AUPP Object Contstructor.
+            AUPP Object Constructor.
             </summary>
             <param name="rc">REST client.</param>
-            <param name="baseApiUrl">Base API url.</param>
+            <param name="baseApiUrl">Base API URL.</param>
         </member>
         <member name="M:RicOneApi.Common.Objects.AUPPObject.CreateXStaffUsers(System.String)">
             <summary>
@@ -3625,7 +3625,7 @@
             XCourses Object Constructor.
             </summary>
             <param name="rc">REST client.</param>
-            <param name="baseApiUrl">Base API url.</param>
+            <param name="baseApiUrl">Base API URL.</param>
         </member>
         <member name="M:RicOneApi.Common.Objects.XCoursesObject.GetXCourses">
             <summary>
@@ -3705,7 +3705,7 @@
         </member>
         <member name="M:RicOneApi.Common.Objects.XCoursesObject.GetXCoursesByXLea(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
-            Request xCourses associated to a specific xLea by refId wtih paging.
+            Request xCourses associated to a specific xLea by refId with paging.
             </summary>
             <param name="refId">RefId of xLea.</param>
             <param name="navigationPage">Page to retrieve.</param>
@@ -4204,7 +4204,7 @@
             XRosters Object Constructor.
             </summary>
             <param name="rc">REST client.</param>
-            <param name="baseApiUrl">Base API url.</param>
+            <param name="baseApiUrl">Base API URL.</param>
         </member>
         <member name="M:RicOneApi.Common.Objects.XRostersObject.GetXRosters">
             <summary>
@@ -4492,7 +4492,7 @@
         </member>
         <member name="M:RicOneApi.Common.Objects.XRostersObject.GetXRostersByXStudent(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
-            Request xRosters associated to a specific xStudent by refId wtih paging.
+            Request xRosters associated to a specific xStudent by refId with paging.
             </summary>
             <param name="refId">RefId of xStudent.</param>
             <param name="navigationPage">Page to retrieve.</param>
@@ -5865,7 +5865,7 @@
         </member>
         <member name="T:RicOneApi.Common.Rest.RestHeader">
             <summary>
-            Accessor class for request headers. This includes paging, id, and shcool year. 
+            Accessor class for request headers. This includes paging, id, and school year. 
             </summary>
         </member>
         <member name="T:RicOneApi.Common.Rest.RestProperties">
@@ -5876,7 +5876,7 @@
         </member>
         <member name="T:RicOneApi.Common.Rest.RestQueryParameter">
             <summary>
-            Accessor class for request query parameters. This includes opaque marker, and account user passwrod provisioning.
+            Accessor class for request query parameters. This includes opaque marker, and account user password provisioning.
             </summary>
         </member>
         <member name="T:RicOneApi.Common.Rest.RestReturn">
@@ -5917,12 +5917,6 @@
             Accessor method that holds navigation last page integer value.
             </summary>
         </member>
-        <member name="M:RicOneApi.Common.Rest.RestReturn.CheckToken(RestSharp.RestClient)">
-            <summary>
-            Validate whether current token is expired. If expired, re-authenticate and use new valid token.
-            </summary>
-            <param name="rc">REST client.</param>
-        </member>
         <member name="T:RicOneApi.Models.Authentication.DecodedToken">
             <summary>
             Decodes provided token and creates DecodedToken object.
@@ -5962,7 +5956,7 @@
         </member>
         <member name="T:RicOneApi.Models.Authentication.Endpoint">
             <summary>
-            Endpoint type contatins enpoint name, href, and token
+            Endpoint type contains endpoint name, href, and token
             </summary>
         </member>
         <member name="T:RicOneApi.Models.Authentication.UserInfo">

@@ -21,7 +21,7 @@ namespace RicOneApi.Common.Objects
         /// XRosters Object Constructor.
         /// </summary>
         /// <param name="rc">REST client.</param>
-        /// <param name="baseApiUrl">Base API url.</param>
+        /// <param name="baseApiUrl">Base API URL.</param>
         internal XRostersObject(RestClient rc, string baseApiUrl)
         {
             this.rc = rc;
@@ -551,7 +551,7 @@ namespace RicOneApi.Common.Objects
         }
 
         /// <summary>
-        /// Request xRosters associated to a specific xStudent by refId wtih paging.
+        /// Request xRosters associated to a specific xStudent by refId with paging.
         /// </summary>
         /// <param name="refId">RefId of xStudent.</param>
         /// <param name="navigationPage">Page to retrieve.</param>

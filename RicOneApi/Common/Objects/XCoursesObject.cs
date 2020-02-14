@@ -21,7 +21,7 @@ namespace RicOneApi.Common.Objects
         /// XCourses Object Constructor.
         /// </summary>
         /// <param name="rc">REST client.</param>
-        /// <param name="baseApiUrl">Base API url.</param>
+        /// <param name="baseApiUrl">Base API URL.</param>
         internal XCoursesObject(RestClient rc, string baseApiUrl)
         {
             this.rc = rc;
@@ -175,7 +175,7 @@ namespace RicOneApi.Common.Objects
         }
 
         /// <summary>
-        /// Request xCourses associated to a specific xLea by refId wtih paging.
+        /// Request xCourses associated to a specific xLea by refId with paging.
         /// </summary>
         /// <param name="refId">RefId of xLea.</param>
         /// <param name="navigationPage">Page to retrieve.</param>

@@ -1445,7 +1445,7 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
-        /// Request xCourses associated to a specific xLea by refId wtih paging.
+        /// Request xCourses associated to a specific xLea by refId with paging.
         /// </summary>
         /// <param name="refId">RefId of xLeas.</param>
         /// <param name="navigationPage">Page to retrieve.</param>
@@ -2024,7 +2024,7 @@ namespace RicOneApi.Api
         }
 
         /// <summary>
-        /// Request xRosters associated to a specific xStudent by refId wtih paging.
+        /// Request xRosters associated to a specific xStudent by refId with paging.
         /// </summary>
         /// <param name="refId">RefId of xStudents.</param>
         /// <param name="navigationPage">Page to retrieve.</param>

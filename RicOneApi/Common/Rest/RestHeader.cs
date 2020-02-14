@@ -6,7 +6,7 @@
 namespace RicOneApi.Common.Rest
 {
     /// <summary>
-    /// Accessor class for request headers. This includes paging, id, and shcool year. 
+    /// Accessor class for request headers. This includes paging, id, and school year. 
     /// </summary>
     class RestHeader
     {

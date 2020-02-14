@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using RestSharp;
 using RicOneApi.Models.Authentication;
 using RicOneApi.Exceptions;
+using RestSharp.Authenticators;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.7.0
- * Since       2019-03-29
+ * Version     1.8.0
+ * Since       2020-02-12
  * Filename    Authenticator.cs
  */
 namespace RicOneApi.Api
@@ -46,7 +47,7 @@ namespace RicOneApi.Api
         /// <summary>
         /// Establish connection to authenticate to OAuth server.
         /// </summary>
-        /// <param name="authUrl">The authentication server url.</param>
+        /// <param name="authUrl">The authentication server URL.</param>
         /// <param name="clientId">The clientId for the application.</param>
         /// <param name="clientSecret">The clientSecret for the application.</param>
         public void Authenticate(string authUrl, string clientId, string clientSecret)
@@ -87,10 +88,22 @@ namespace RicOneApi.Api
         /// <summary>
         /// Re-authenticates with authentication server if token is expired.
         /// </summary>
-        internal void RefreshToken()
+        internal void RefreshToken(string token, RestClient restClient)
         {
+            DecodedToken dt = new DecodedToken(token);
 
-            Login(_clientId, _clientSecret);
+            if (DateTime.Now >= Util.ConvertUnixTime(dt.GetDecodedToken().exp).AddMinutes(-10))
+            {
+                Instance.SetMessage("REFRESHED");
+                Login(_clientId, _clientSecret);
+                restClient.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(Instance.GetToken(), "Bearer");
+            }
+            else
+            {
+                Instance.SetMessage("VALID");
+                restClient.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(Instance.GetToken(), "Bearer");
+            }
+
         }
 
         /// <summary>
