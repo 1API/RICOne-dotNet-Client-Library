@@ -1,0 +1,344 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RicOne.Authentication</name>
+    </assembly>
+    <members>
+        <member name="T:RicOne.Authentication.Authenticator">
+            <summary>
+            Handles authentication for user to Authentication server. Included methods return user and provider information necessary to
+            access the data API (i.e. token and url).
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Authenticator.Instance">
+            <summary>
+            Singleton instantiation.
+            </summary>
+        </member>
+        <member name="M:RicOne.Authentication.Authenticator.Authenticate(System.String,System.String,System.String)">
+            <summary>
+            Establish connection to authenticate to xPress or OneRoster authentication server.
+            </summary>
+            <param name="authUrl">The authentication server url.</param>
+            <param name="clientId">The clientId for the application.</param>
+            <param name="clientSecret">The clientSecret for the application.</param>
+        </member>
+        <member name="M:RicOne.Authentication.Authenticator.RefreshToken">
+            <summary>
+            Re-authenticates with xPress or OneRoster authentication server if token is expired.
+            </summary>
+        </member>
+        <member name="M:RicOne.Authentication.Authenticator.XPressLogin(System.String,System.String,System.String)">
+            <summary>
+            POST to xPress authentication server with provided credentials.
+            </summary>
+            <param name="authUrl">The authentication server url.</param>
+            <param name="clientId">The clientId for the application.</param>
+            <param name="clientSecret">The clientSecret for the application.</param>
+            <returns>A list of type Endpoint.</returns>
+        </member>
+        <member name="M:RicOne.Authentication.Authenticator.OneRosterLogin(System.String,System.String,System.String)">
+            <summary>
+            POST to OneRoster authentication server with provided credentials.
+            </summary>
+            <param name="authUrl">The authentication server url.</param>
+            <param name="clientId">The clientId for the application.</param>
+            <param name="clientSecret">The clientSecret for the application.</param>
+            <returns>A list of type Endpoint.</returns>
+        </member>
+        <member name="M:RicOne.Authentication.Authenticator.GetToken(System.String)">
+            <summary>
+            Retrieve a provider's token.
+            </summary>
+            <param name="providerId">The providerId to be returned.</param>
+            <returns>String type.</returns>
+        </member>
+        <member name="M:RicOne.Authentication.Authenticator.GetEndpoints(System.String)">
+            <summary>
+            Details of a specific endpoint by providerId.
+            </summary>
+            <param name="providerId">The providerId to be returned.</param>
+            <returns>List of type Endpoint.</returns>
+        </member>
+        <member name="M:RicOne.Authentication.Authenticator.GetEndpoints">
+            <summary>
+            A list of all endpoints an application is associated with and it's details.
+            </summary>
+            <returns>List of type Endpoint.</returns>
+        </member>
+        <member name="P:RicOne.Authentication.DecodedToken.ApplicationId">
+            <summary>
+            Get applicaiton id.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.DecodedToken.ProviderId">
+            <summary>
+            Get provider id.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.DecodedToken.Href">
+            <summary>
+            Get provider href.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.DecodedToken.Token">
+            <summary>
+            Get bearer token.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.DecodedToken.Iat">
+            <summary>
+            Get issued at time.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.DecodedToken.Exp">
+            <summary>
+            Get expiration time.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.DecodedToken.Iss">
+            <summary>
+            Get issuer.
+            </summary>
+        </member>
+        <member name="M:RicOne.Authentication.DecodedToken.WillTokenExpire">
+            <summary>
+            Checks if an endpoint token will expire within the next 10 minutes.
+            </summary>
+            <returns>A Boolean type.</returns>
+        </member>
+        <member name="T:RicOne.Authentication.Endpoint">
+            <summary>
+            The Endpoint class returns data about a specific provider. This includes the provider name, 
+            href, provider id, token, and decoded token.
+            </summary>
+        </member>
+        <member name="M:RicOne.Authentication.Endpoint.#ctor(RicOne.Authentication.Models.XPress.XPressEndpoint,RicOne.Authentication.DecodedToken)">
+            <summary>
+            Constructor for an xPress endpoint.
+            </summary>
+            <param name="endpoint">An xPress endpoint.</param>
+            <param name="decodedToken">The decoded token for an xPress endpoint.</param>
+        </member>
+        <member name="M:RicOne.Authentication.Endpoint.#ctor(RicOne.Authentication.Models.OneRoster.OneRosterEndpoint,RicOne.Authentication.DecodedToken)">
+            <summary>
+            Constructor for a OneRoster endpoint.
+            </summary>
+            <param name="endpoint">A OneRoster endpoint.</param>
+            <param name="decodedToken">The decoded token for a OneRoster endpoint.</param>
+        </member>
+        <member name="P:RicOne.Authentication.Endpoint.Name">
+            <summary>
+            Get provider name.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Endpoint.Href">
+            <summary>
+            Get provider href.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Endpoint.ProviderId">
+            <summary>
+            Get provider id.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Endpoint.Token">
+            <summary>
+            Get the bearer token for API authentication.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Endpoint.DecodedToken">
+            <summary>
+            Get the decoded token information on a bearer token.
+            </summary>
+        </member>
+        <member name="T:RicOne.Authentication.Models.OneRoster.OneRosterAuthResponse">
+            <summary>
+            OneRosterAuthResponse type contains expires in and list of endpoints.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.OneRoster.OneRosterAuthResponse.ExpiresIn">
+            <summary>
+            Get the expired time in seconds.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.OneRoster.OneRosterAuthResponse.Endpoint">
+            <summary>
+            Get all endpoints.
+            </summary>
+        </member>
+        <member name="T:RicOne.Authentication.Models.OneRoster.OneRosterDecodedToken">
+            <summary>
+            OneRosterDecodedToken type contains application id, IMS global security scope,
+            provider id, href, issued at time, expiration time, and issuer for a OneRoster bearer token.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.OneRoster.OneRosterDecodedToken.AppId">
+            <summary>
+            Get applicaiton id.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.OneRoster.OneRosterDecodedToken.ImsGlobalOrgSecurityScope">
+            <summary>
+            Get the ims.global.org.security.scope.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.OneRoster.OneRosterDecodedToken.ProviderId">
+            <summary>
+            Get provider id.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.OneRoster.OneRosterDecodedToken.Href">
+            <summary>
+            Get provider href.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.OneRoster.OneRosterDecodedToken.Iat">
+            <summary>
+            Get issued at time.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.OneRoster.OneRosterDecodedToken.Exp">
+            <summary>
+            Get expiration time.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.OneRoster.OneRosterDecodedToken.Iss">
+            <summary>
+            Get issuer.
+            </summary>
+        </member>
+        <member name="T:RicOne.Authentication.Models.OneRoster.OneRosterEndpoint">
+            <summary>
+            OneRosterEndpoint type contains endpoint name, href, providerId, access token, and token type.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.OneRoster.OneRosterEndpoint.Name">
+            <summary>
+            Get provider name.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.OneRoster.OneRosterEndpoint.Href">
+            <summary>
+            Get provider href.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.OneRoster.OneRosterEndpoint.ProviderId">
+            <summary>
+            Get provider id.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.OneRoster.OneRosterEndpoint.AccessToken">
+            <summary>
+            Get the token for API authentication.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.OneRoster.OneRosterEndpoint.TokenType">
+            <summary>
+            Get the token type i.e. bearer.
+            </summary>
+        </member>
+        <member name="T:RicOne.Authentication.Models.XPress.XPressAuthResponse">
+            <summary>
+            XPressAuthResponse type contains id, username, token, and list of endpoints.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.XPress.XPressAuthResponse.Id">
+            <summary>
+            Get the universally unique identifier (UUID)
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.XPress.XPressAuthResponse.Username">
+            <summary>
+            Get the application user name.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.XPress.XPressAuthResponse.Token">
+            <summary>
+            Get the bearer token for API authentication.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.XPress.XPressAuthResponse.Endpoint">
+            <summary>
+            Get all endpoints.
+            </summary>
+        </member>
+        <member name="T:RicOne.Authentication.Models.XPress.XPressDecodedToken">
+            <summary>
+            XPressDecodedToken type contains application id, issued at time, expiration time, and issuer
+            for an xPress bearer token.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.XPress.XPressDecodedToken.ApplicationId">
+            <summary>
+            Get applicaiton id.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.XPress.XPressDecodedToken.Iat">
+            <summary>
+            Get issued at time.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.XPress.XPressDecodedToken.Exp">
+            <summary>
+            Get expiration time.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.XPress.XPressDecodedToken.Iss">
+            <summary>
+            Get issuer.
+            </summary>
+        </member>
+        <member name="T:RicOne.Authentication.Models.XPress.XPressEndpoint">
+            <summary>
+            XPressEndpoint type contains endpoint name, href, providerId, and token.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.XPress.XPressEndpoint.Name">
+            <summary>
+            Get provider name.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.XPress.XPressEndpoint.Href">
+            <summary>
+            Get provider href.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.XPress.XPressEndpoint.ProviderId">
+            <summary>
+            Get provider id.
+            </summary>
+        </member>
+        <member name="P:RicOne.Authentication.Models.XPress.XPressEndpoint.Token">
+            <summary>
+            Get the token for API authentication.
+            </summary>
+        </member>
+        <member name="T:RicOne.Authentication.SpecEnum.SpecType">
+            <summary>
+            Enumerator with data specification types.
+            </summary>
+        </member>
+        <member name="T:RicOne.Authentication.TokenDecoder">
+            <summary>
+            Abstract class for decoding a token.
+            </summary>
+        </member>
+        <member name="M:RicOne.Authentication.TokenDecoder.GetDecodedToken(RicOne.Authentication.Models.XPress.XPressDecodedToken,System.String)">
+            <summary>
+            Return the decoded token information on an xPress token.
+            </summary>
+            <param name="dt">An xPress decoded token.</param>
+            <param name="token">An endpoint token.</param>
+            <returns>A DecodedToken type.</returns>
+        </member>
+        <member name="M:RicOne.Authentication.TokenDecoder.GetDecodedToken(RicOne.Authentication.Models.OneRoster.OneRosterDecodedToken,System.String)">
+            <summary>
+            Return the decoded token information on an xPress token.
+            </summary>
+            <param name="dt">An xPress decoded token.</param>
+            <param name="token">An endpoint token.</param>
+            <returns>A DecodedToken type.</returns>
+        </member>
+    </members>
+</doc>

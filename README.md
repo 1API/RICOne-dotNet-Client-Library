@@ -1,4 +1,4 @@
-Copyright © 2014-2019 New York State Education Department. All rights reserved.
+Copyright © 2014-2020 New York State Education Department. All rights reserved.
 
 # RICOne API .NET Client Library
 The RICOne .NET Client Library was developed using .NET 4.6 and RestSharp (http://restsharp.org/).
@@ -20,7 +20,8 @@ foreach (Endpoint e in auth.GetEndpoints())
 ```
 
 ### Project Contents
-* RicOneApi - Client Library
+* RicOne.Authentication - Client to connect to the RIC One xPress and OneRoster OAuth service
+* RicOneApi.XPress - xPress model client library
 * RicOneApi.Tests - Test console outputs of all service paths
 * SampleConsole - Simple console app showing use
 
@@ -36,7 +37,17 @@ const string clientId = "YOUR USERNAME";
 const string clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
-### v1.8.0
+### RicOne.Authentication
+#### v1.0.0
+* The GetToken() method now requires you to specify a providerId.
+* Removed the following methods from Authenticator
+    * List<EndPoint> GetEndpoints(string providerId, Boolean returnAllEndpoints)
+    * Endpoint GetEndpoint(string providerId)
+* Moved GetDecodedToken from DecodedToken class to Endpoint class. DecodedToken methods can be accessed using Endpoint.DecodedToken
+
+### RicOne.XPress
+#### v1.8.0
+* Moved Authentication components out of RicOneApi project into new RicOne.Authentication project.
 * Added OtherAddresses to xStudents object.
 * Added the following to xStaff:
     * Addresses

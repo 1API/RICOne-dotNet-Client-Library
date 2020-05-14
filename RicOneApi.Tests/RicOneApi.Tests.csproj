@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RicOneApi.Tests</RootNamespace>
     <AssemblyName>RicOneApi.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -52,7 +52,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>RicOneApi.Tests.Program</StartupObject>
+    <StartupObject>RicOneApi.Tests.OneRosterAuth</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="RestSharp">
@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="AppAccountProvisioning.cs" />
     <Compile Include="AuthInfo.cs" />
+    <Compile Include="OneRosterAuth.cs" />
     <Compile Include="ChangesSince.cs" />
     <Compile Include="EntryExit.cs" />
     <Compile Include="IdType.cs" />
@@ -84,6 +85,10 @@
     <Compile Include="TokenInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RicOne.Authentication\RicOne.Authentication.csproj">
+      <Project>{AA0FBCBE-A319-4FD0-A57C-3DDABEE4F1A1}</Project>
+      <Name>RicOne.Authentication</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RicOneAPI\RicOneApi.csproj">
       <Project>{18c26b37-d4ab-49ed-b4a6-6fc235caf643}</Project>
       <Name>RicOneApi</Name>
