@@ -2,7 +2,7 @@
 using System;
 using System.Configuration;
 using RicOneApi.Models.XPress;
-using RicOneApi.Models.Authentication;
+using RicOneApi.Authentication;
 
 namespace RicOneApi.Tests
 {
@@ -22,7 +22,7 @@ namespace RicOneApi.Tests
             //Get endpoints by provider
             foreach (Endpoint e in auth.GetEndpoints(providerId))
             {
-                XPress xPress = new XPress(e.href);
+                XPress xPress = new XPress(e);
 
                 //Staff
                 //xPress.CreateXStaffUsers(SCHOOL_REFID);

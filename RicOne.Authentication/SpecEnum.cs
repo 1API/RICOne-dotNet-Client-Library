@@ -3,7 +3,7 @@
  * Version     1.0.0
  * Since       4/16/2020
  */
-namespace RicOne.Authentication
+namespace RicOneApi.Authentication
 {
     class SpecEnum
     {

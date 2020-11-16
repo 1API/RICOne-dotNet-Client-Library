@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RicOneApi.Api;
 using RicOneApi.Common.Objects;
-using RicOneApi.Models.Authentication;
+using RicOneApi.Authentication;
 using RicOneApi.Models.XPress;
 
 namespace SampleConsole
@@ -36,7 +36,7 @@ namespace SampleConsole
 
             foreach (Endpoint e in auth.GetEndpoints(providerId)) //For the provided endpoint
             {
-                XPress xPress = new XPress(e.href); //Pass endpoint info to data API (token, href)
+                XPress xPress = new XPress(e); //Pass endpoint info to data API (token, href)
 
                 foreach (XLeaType l in xPress.GetXLeas().Data) //Iterate through each xLea
                 {

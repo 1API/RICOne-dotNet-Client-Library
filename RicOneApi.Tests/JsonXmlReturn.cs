@@ -1,5 +1,5 @@
 ﻿using RicOneApi.Api;
-using RicOneApi.Models.Authentication;
+using RicOneApi.Authentication;
 using RicOneApi.Models.XPress;
 using System;
 using System.Collections.Generic;
@@ -21,7 +21,7 @@ namespace RicOneApi.Tests
             auth.Authenticate(authUrl, clientId, clientSecret);
             foreach (Endpoint e in auth.GetEndpoints(providerId))
             {
-                XPress xPress = new XPress(e.href);
+                XPress xPress = new XPress(e);
 
                 string json = xPress.GetXLeas().Json;
                 string xml = xPress.GetXLeas(2018).Xml;

@@ -1,4 +1,4 @@
-﻿using RicOne.Authentication.Exceptions;
+﻿using RicOneApi.Authentication.Exceptions;
 using System;
 
 
@@ -7,7 +7,7 @@ using System;
  * Version     1.0.0
  * Since       4/20/2020
  */
-namespace RicOne.Authentication
+namespace RicOneApi.Authentication
 {
     public class DecodedToken
     {

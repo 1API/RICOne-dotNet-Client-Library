@@ -1,6 +1,6 @@
 ﻿using System;
 using RicOneApi.Api;
-using RicOneApi.Models.Authentication;
+using RicOneApi.Authentication;
 using RicOneApi.Models.XPress;
 using System.Configuration;
 using RicOneApi.Common.Objects;
@@ -23,14 +23,14 @@ namespace RicOneApi.Tests
 
         const int NAVIGATION_PAGE_SIZE = 1;
 
-        const String LEA_REFID = "03ACF04F-DC12-411A-9A42-E8323516D699";
-        const String SCHOOL_REFID = "AE6B3441-5E31-4573-BADB-081669D79C7F";
-        const String CALENDAR_REFID = "C419EBD3-5EFC-449C-8890-28545663350F";
-        const String COURSE_REFID = "50F2377E-29BD-45C6-950C-C41B3432FC0A";
-        const String ROSTER_REFID = "00BAD4F5-9CF4-4D49-A8CC-666D02180300";
-        const String STAFF_REFID = "0C6E7BFA-4E4E-4F82-BCE8-C27729A79F29";
-        const String STUDENT_REFID = "3089EF6E-143D-4C58-ABF3-8CED68B7AEEE";
-        const String CONTACT_REFID = "0BFFDDCF-B25C-423B-BC65-553DE0B95F4B";
+        const string LEA_REFID = "03ACF04F-DC12-411A-9A42-E8323516D699";
+        const string SCHOOL_REFID = "AE6B3441-5E31-4573-BADB-081669D79C7F";
+        const string CALENDAR_REFID = "09F0C2E3-B437-3671-AB05-1BA18B6FA034";
+        const string COURSE_REFID = "82045B14-FE41-4FA8-8CD7-2350BF7C4C9B";
+        const string ROSTER_REFID = "00E1179D-60AF-4C98-8B59-557830BDD5FC";
+        const string STAFF_REFID = "15355903-789E-434E-A0EA-B8F9F0E3374A";
+        const string STUDENT_REFID = "C5039D85-FEA9-46E2-8D3D-C468937953B4";
+        const string CONTACT_REFID = "2D6E0697-EDF8-4E9E-ADCF-18CA9EDF0529";
         #endregion
 
         static void Main(string[] args)
@@ -41,7 +41,7 @@ namespace RicOneApi.Tests
             //Get endpoints by provider
             foreach (Endpoint e in auth.GetEndpoints(providerId))
             {
-                XPress xPress = new XPress(e.href);
+                XPress xPress = new XPress(e);
 
                 #region navigationLastPage
                 XPress_LastPage_Counts(xPress);

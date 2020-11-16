@@ -7,7 +7,7 @@ using System.Collections.Generic;
  * Version     1.0.0
  * Since       4/14/2020
  */
-namespace RicOne.Authentication.Models.OneRoster
+namespace RicOneApi.Authentication.Models.OneRoster
 {
     /// <summary>
     /// OneRosterAuthResponse type contains expires in and list of endpoints.

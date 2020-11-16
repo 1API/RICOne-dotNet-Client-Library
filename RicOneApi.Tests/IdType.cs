@@ -1,5 +1,5 @@
 ﻿using RicOneApi.Api;
-using RicOneApi.Models.Authentication;
+using RicOneApi.Authentication;
 using RicOneApi.Models.XPress;
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,7 @@ namespace RicOneApi.Tests
             auth.Authenticate(authUrl, clientId, clientSecret);
             foreach (Endpoint e in auth.GetEndpoints(providerId))
             {
-                XPress xPress = new XPress(e.href);
+                XPress xPress = new XPress(e);
 
                 //XLeaType l = xPress.GetXLea("beds", "738121").getData();
                 XLeaType l = xPress.GetXLea("local", "BT101").Data;

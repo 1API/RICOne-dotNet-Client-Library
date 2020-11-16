@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleConsole", "SampleCons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RicOneApi.Tests", "RicOneAPI.Tests\RicOneApi.Tests.csproj", "{07169E5C-454D-4B60-93DA-E63DEDC8F60C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RicOne.Authentication", "RicOne.Authentication\RicOne.Authentication.csproj", "{AA0FBCBE-A319-4FD0-A57C-3DDABEE4F1A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RicOneApi.Authentication", "RicOne.Authentication\RicOneApi.Authentication.csproj", "{AA0FBCBE-A319-4FD0-A57C-3DDABEE4F1A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

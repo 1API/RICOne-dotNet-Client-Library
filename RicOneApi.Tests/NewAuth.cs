@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RicOneApi.Api;
-using RicOneApi.Models.Authentication;
+using RicOneApi.Authentication;
 using RicOneApi.Models.XPress;
 
 namespace RicOneApi.Tests
@@ -30,7 +30,7 @@ namespace RicOneApi.Tests
 
             foreach (Endpoint e in auth.GetEndpoints(providerId))
             {
-                Console.WriteLine(e.name + " | " + e.href + " | " + e.provider_id + " | " + e.token + Console.Out.NewLine);
+                Console.WriteLine(e.Name + " | " + e.Href + " | " + e.ProviderId + " | " + e.Token + Console.Out.NewLine);
             }
 
             //while (true)

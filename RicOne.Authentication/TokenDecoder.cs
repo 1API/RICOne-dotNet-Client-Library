@@ -1,8 +1,9 @@
-﻿using RicOne.Authentication.Models.OneRoster;
-using RicOne.Authentication.Models.XPress;
+﻿using RicOneApi.Authentication.Models.OneRoster;
+using RicOneApi.Authentication.Models.XPress;
 using JWT;
 using JWT.Serializers;
 using System;
+using JWT.Exceptions;
 
 
 /*
@@ -10,14 +11,14 @@ using System;
  * Version     1.0.0
  * Since       4/20/2020
  */
-namespace RicOne.Authentication
+namespace RicOneApi.Authentication
 {
     /// <summary>
     /// Abstract class for decoding a token.
     /// </summary>
     abstract class TokenDecoder
     {
-        internal static T DecodeToken<T>(string token) //TODO remove where T : class, new()
+        internal static T DecodeToken<T>(string token)
         {
             try
             {

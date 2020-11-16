@@ -1,11 +1,12 @@
 ﻿using RestSharp;
+using RicOneApi.Authentication;
 using RicOneApi.Common.Rest;
 using RicOneApi.Models.XPress;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.7.0
- * Since       2019-01-03
+ * Version     1.8.0
+ * Since       5/18/2020
  */
 namespace RicOneApi.Common.Objects
 {
@@ -15,17 +16,17 @@ namespace RicOneApi.Common.Objects
     class XContactsObject
     {
         private RestClient rc;
-        private string baseApiUrl;
+        private Endpoint endpoint;
 
         /// <summary>
         /// XContacts Object Constructor.
         /// </summary>
         /// <param name="rc">REST client.</param>
-        /// <param name="baseApiUrl">Base API url.</param>
-        internal XContactsObject(RestClient rc, string baseApiUrl)
+        /// <param name="endpoint">Endpoint object.</param>
+        internal XContactsObject(RestClient rc, Endpoint endpoint)
         {
             this.rc = rc;
-            this.baseApiUrl = baseApiUrl;
+            this.endpoint = endpoint;
         }
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContacts, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContacts, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -51,7 +52,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContacts, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContacts, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -66,7 +67,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContacts, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContacts, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -82,7 +83,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContacts, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContacts, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -96,7 +97,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContacts, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContacts, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -112,7 +113,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContacts, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContacts, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -126,7 +127,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactByRefId, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactByRefId, refId, rh, rqp);
             return rr.MakeSingleRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -141,7 +142,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactByRefId, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactByRefId, refId, rh, rqp);
             return rr.MakeSingleRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -155,7 +156,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXLea, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactsByXLea, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -170,7 +171,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXLea, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactsByXLea, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -186,7 +187,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXLea, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactsByXLea, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -203,7 +204,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXLea, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactsByXLea, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -218,7 +219,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXLea, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactsByXLea, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -235,7 +236,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXLea, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactsByXLea, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -249,7 +250,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXSchool, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactsByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -264,7 +265,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXSchool, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactsByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -280,7 +281,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXSchool, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactsByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -297,7 +298,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXSchool, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactsByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -312,7 +313,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXSchool, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactsByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -329,7 +330,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXSchool, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactsByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -343,7 +344,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXStudent, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactsByXStudent, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -358,7 +359,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXStudent, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactsByXStudent, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -374,7 +375,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXStudent, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactsByXStudent, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -391,7 +392,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXStudent, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactsByXStudent, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -406,7 +407,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXStudent, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactsByXStudent, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
 
@@ -423,7 +424,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXContactsByXStudent, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXContactsByXStudent, refId, rh, rqp);
             return rr.MakeAllRequest<XContactType, XContactCollectionType>(rc, rp);
         }
     }

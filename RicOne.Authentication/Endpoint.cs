@@ -1,6 +1,6 @@
-﻿using RicOne.Authentication.Exceptions;
-using RicOne.Authentication.Models.OneRoster;
-using RicOne.Authentication.Models.XPress;
+﻿using RicOneApi.Authentication.Exceptions;
+using RicOneApi.Authentication.Models.OneRoster;
+using RicOneApi.Authentication.Models.XPress;
 
 
 /*
@@ -8,7 +8,7 @@ using RicOne.Authentication.Models.XPress;
  * Version     1.0.0
  * Since       4/16/2020
  */
-namespace RicOne.Authentication
+namespace RicOneApi.Authentication
 {
     /// <summary>
     /// The Endpoint class returns data about a specific provider. This includes the provider name, 

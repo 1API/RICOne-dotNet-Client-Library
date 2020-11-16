@@ -6,7 +6,7 @@ using System.Collections.Generic;
  * Version     1.0.0
  * Since       4/14/2020
  */
-namespace RicOne.Authentication.Models.XPress
+namespace RicOneApi.Authentication.Models.XPress
 {
     /// <summary>
     /// XPressAuthResponse type contains id, username, token, and list of endpoints.

@@ -56,10 +56,18 @@ const string clientSecret = "YOUR PASSWORD";
     * OtherPhoneNumbers
     * OtherEmails
     * Languages
+* Added new method GetHeaders()
+    * New method will make a HEAD request versus GET to retrieve header information and will return the following:
+        * Header
+        * Status code
+        * Status message
+        * Navigation Last Page
+        * Record Count
 * Added support for new service path xEmployments, which includes staff employment information.
     * /xEmployments
     * /xLeas/{refId}/xEmployments
     * /xSchool/{refId}/xEmployments
+* Deprecated GetLastPage() - use new GetHeaders().NavigationLastPage method to retrieve NavigationLastPage value
 * Updated Authenticator to better handle token expiration.
 
 ### v1.7.0

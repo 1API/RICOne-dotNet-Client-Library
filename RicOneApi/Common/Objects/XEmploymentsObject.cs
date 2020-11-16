@@ -1,11 +1,12 @@
 ﻿using RestSharp;
+using RicOneApi.Authentication;
 using RicOneApi.Common.Rest;
 using RicOneApi.Models.XPress;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
  * Version     1.8.0
- * Since       2019-11-15
+ * Since       5/18/2020
  */
 namespace RicOneApi.Common.Objects
 {
@@ -15,17 +16,17 @@ namespace RicOneApi.Common.Objects
     class XEmploymentsObject
     {
         private RestClient rc;
-        private string baseApiUrl;
+        private Endpoint endpoint;
 
         /// <summary>
         /// XEmployments Object Constructor.
         /// </summary>
         /// <param name="rc">REST client.</param>
-        /// <param name="baseApiUrl">Base API url.</param>
-        internal XEmploymentsObject(RestClient rc, string baseApiUrl)
+        /// <param name="endpoint">Endpoint object.</param>
+        internal XEmploymentsObject(RestClient rc, Endpoint endpoint)
         {
             this.rc = rc;
-            this.baseApiUrl = baseApiUrl;
+            this.endpoint = endpoint;
         }
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmployments, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmployments, rh, rqp);
             return rr.MakeAllRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -51,7 +52,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmployments, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmployments, rh, rqp);
             return rr.MakeAllRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -66,7 +67,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmployments, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmployments, rh, rqp);
             return rr.MakeAllRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -82,7 +83,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmployments, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmployments, rh, rqp);
             return rr.MakeAllRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -96,7 +97,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmployments, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmployments, rh, rqp);
             return rr.MakeAllRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -112,7 +113,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmployments, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmployments, rh, rqp);
             return rr.MakeAllRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -126,7 +127,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmploymentByRefId, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmploymentByRefId, refId, rh, rqp);
             return rr.MakeSingleRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -141,7 +142,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmploymentByRefId, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmploymentByRefId, refId, rh, rqp);
             return rr.MakeSingleRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -155,7 +156,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmploymentsByXLea, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmploymentsByXLea, refId, rh, rqp);
             return rr.MakeAllRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -170,7 +171,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmploymentsByXLea, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmploymentsByXLea, refId, rh, rqp);
             return rr.MakeAllRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -186,7 +187,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmploymentsByXLea, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmploymentsByXLea, refId, rh, rqp);
             return rr.MakeAllRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -203,7 +204,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmploymentsByXLea, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmploymentsByXLea, refId, rh, rqp);
             return rr.MakeAllRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -218,7 +219,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmploymentsByXLea, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmploymentsByXLea, refId, rh, rqp);
             return rr.MakeAllRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -235,7 +236,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmploymentsByXLea, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmploymentsByXLea, refId, rh, rqp);
             return rr.MakeAllRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -249,7 +250,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmploymentsByXSchool, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmploymentsByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -264,7 +265,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmploymentsByXSchool, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmploymentsByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -280,7 +281,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmploymentsByXSchool, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmploymentsByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -297,7 +298,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmploymentsByXSchool, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmploymentsByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -312,7 +313,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmploymentsByXSchool, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmploymentsByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
 
@@ -329,7 +330,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXEmploymentsByXSchool, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXEmploymentsByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XEmploymentType, XEmploymentCollectionType>(rc, rp);
         }
     }

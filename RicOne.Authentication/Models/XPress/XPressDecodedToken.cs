@@ -5,7 +5,7 @@
  * Version     1.0.0
  * Since       4/14/2020
  */
-namespace RicOne.Authentication.Models.XPress
+namespace RicOneApi.Authentication.Models.XPress
 {
     /// <summary>
     /// XPressDecodedToken type contains application id, issued at time, expiration time, and issuer

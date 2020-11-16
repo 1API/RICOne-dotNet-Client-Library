@@ -1,10 +1,10 @@
-﻿using RicOneApi.Common.Objects;
-using System;
+﻿using RicOneApi.Authentication;
+using RicOneApi.Common.Objects;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.6.3
- * Since       2018-08-15
+ * Version     1.9.0
+ * Since       2020-08-15
  */
 namespace RicOneApi.Common.Rest
 {
@@ -14,36 +14,33 @@ namespace RicOneApi.Common.Rest
     /// </summary>
     class RestProperties
     {
-        private String baseUrl;
-        private ServicePath servicePath;
-        private String refId;
-        private RestHeader restHeader;
-        private RestQueryParameter restQueryParameter;
-
-        public RestProperties(string baseUrl, ServicePath servicePath, RestHeader restHeader, RestQueryParameter restQueryParameter)
+        public RestProperties(Endpoint endpoint, ServicePath servicePath, RestHeader restHeader, RestQueryParameter restQueryParameter)
         {
-            this.BaseUrl = baseUrl;
-            this.ServicePath = servicePath;
-            this.RestHeader = restHeader;
-            this.RestQueryParameter = restQueryParameter;
+            Endpoint = endpoint;
+            BaseUrl = endpoint.Href;
+            ServicePath = servicePath;
+            RestHeader = restHeader;
+            RestQueryParameter = restQueryParameter;
         }
 
-        public RestProperties(string baseUrl, ServicePath servicePath, string refId, RestHeader restHeader, RestQueryParameter restQueryParameter)
+        public RestProperties(Endpoint endpoint, ServicePath servicePath, string refId, RestHeader restHeader, RestQueryParameter restQueryParameter)
         {
-            this.BaseUrl = baseUrl;
-            this.ServicePath = servicePath;
-            this.RefId = refId;
-            this.RestHeader = restHeader;
-            this.RestQueryParameter = restQueryParameter;
+            Endpoint = endpoint;
+            BaseUrl = endpoint.Href;
+            ServicePath = servicePath;
+            RefId = refId;
+            RestHeader = restHeader;
+            RestQueryParameter = restQueryParameter;
         }
 
-        public string BaseUrl { get => baseUrl; set => baseUrl = value; }
-        public string RefId { get => refId; set => refId = value; }
-        public ServicePath ServicePath { get => servicePath; set => servicePath = value; }
-        internal RestHeader RestHeader { get => restHeader; set => restHeader = value; }
-        internal RestQueryParameter RestQueryParameter { get => restQueryParameter; set => restQueryParameter = value; }
+        public Endpoint Endpoint { get; set; }
+        public string BaseUrl { get; set; }
+        public string RefId { get; set; }
+        public ServicePath ServicePath { get; set; }
+        internal RestHeader RestHeader { get; set; }
+        internal RestQueryParameter RestQueryParameter { get; set; }
 
-        internal bool HasRefId() { return !string.IsNullOrEmpty(refId); }
+        internal bool HasRefId() { return !string.IsNullOrEmpty(RefId); }
 
         public override string ToString()
         {

@@ -5,7 +5,7 @@
  * Version     1.0.0
  * Since       4/14/2020
  */
-namespace RicOne.Authentication.Models.OneRoster
+namespace RicOneApi.Authentication.Models.OneRoster
 {
     /// <summary>
     /// OneRosterEndpoint type contains endpoint name, href, providerId, access token, and token type.

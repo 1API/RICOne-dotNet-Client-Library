@@ -1,8 +1,8 @@
 ﻿using RestSharp;
 using RestSharp.Authenticators;
-using RicOne.Authentication.Exceptions;
-using RicOne.Authentication.Models.OneRoster;
-using RicOne.Authentication.Models.XPress;
+using RicOneApi.Authentication.Exceptions;
+using RicOneApi.Authentication.Models.OneRoster;
+using RicOneApi.Authentication.Models.XPress;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ using System.Linq;
  * Version     1.0.0
  * Since       4/20/2020
  */
-namespace RicOne.Authentication
+namespace RicOneApi.Authentication
 {
     /// <summary>
     /// Handles authentication for user to Authentication server. Included methods return user and provider information necessary to

@@ -1,11 +1,12 @@
 ﻿using RestSharp;
+using RicOneApi.Authentication;
 using RicOneApi.Common.Rest;
 using RicOneApi.Models.XPress;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * Version     1.7.0
- * Since       2019-01-03
+ * Version     1.8.0
+ * Since       5/18/2020
  */
 namespace RicOneApi.Common.Objects
 {
@@ -15,17 +16,17 @@ namespace RicOneApi.Common.Objects
     class XRostersObject
     {
         private RestClient rc;
-        private string baseApiUrl;
+        private Endpoint endpoint;
 
         /// <summary>
         /// XRosters Object Constructor.
         /// </summary>
         /// <param name="rc">REST client.</param>
-        /// <param name="baseApiUrl">Base API URL.</param>
-        internal XRostersObject(RestClient rc, string baseApiUrl)
+        /// <param name="endpoint">Endpoint object.</param>
+        internal XRostersObject(RestClient rc, Endpoint endpoint)
         {
             this.rc = rc;
-            this.baseApiUrl = baseApiUrl;
+            this.endpoint = endpoint;
         }
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRosters, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRosters, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -51,7 +52,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRosters, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRosters, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -66,7 +67,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRosters, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRosters, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -82,7 +83,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRosters, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRosters, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -96,7 +97,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRosters, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRosters, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -112,7 +113,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRosters, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRosters, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -126,7 +127,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRosterByRefId, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRosterByRefId, refId, rh, rqp);
             return rr.MakeSingleRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -141,7 +142,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRosterByRefId, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRosterByRefId, refId, rh, rqp);
             return rr.MakeSingleRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -155,7 +156,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXLea, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXLea, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -170,7 +171,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXLea, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXLea, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -186,7 +187,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXLea, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXLea, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -203,7 +204,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXLea, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXLea, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -218,7 +219,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXLea, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXLea, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -235,7 +236,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXLea, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXLea, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -249,7 +250,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXSchool, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -264,7 +265,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXSchool, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -280,7 +281,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXSchool, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -297,7 +298,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXSchool, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -312,7 +313,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXSchool, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -329,7 +330,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXSchool, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXSchool, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -343,7 +344,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXCourse, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXCourse, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -358,7 +359,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXCourse, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXCourse, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -374,7 +375,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXCourse, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXCourse, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -391,7 +392,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXCourse, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXCourse, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -406,7 +407,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXCourse, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXCourse, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -423,7 +424,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXCourse, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXCourse, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -437,7 +438,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXStaff, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXStaff, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -452,7 +453,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXStaff, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXStaff, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -468,7 +469,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXStaff, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXStaff, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -485,7 +486,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXStaff, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXStaff, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -500,7 +501,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXStaff, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXStaff, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -517,7 +518,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXStaff, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXStaff, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -531,7 +532,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXStudent, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXStudent, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -546,7 +547,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXStudent, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXStudent, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -562,7 +563,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXStudent, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXStudent, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -579,7 +580,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
             RestQueryParameter rqp = new RestQueryParameter();
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXStudent, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXStudent, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -594,7 +595,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader();
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXStudent, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXStudent, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
 
@@ -611,7 +612,7 @@ namespace RicOneApi.Common.Objects
             RestReturn rr = new RestReturn();
             RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
             RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-            RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GetXRostersByXStudent, refId, rh, rqp);
+            RestProperties rp = new RestProperties(endpoint, ServicePath.GetXRostersByXStudent, refId, rh, rqp);
             return rr.MakeAllRequest<XRosterType, XRosterCollectionType>(rc, rp);
         }
     }

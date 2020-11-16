@@ -2,6 +2,8 @@
 using RestSharp;
 using RicOneApi.Models.XPress;
 using RicOneApi.Common.Objects;
+using RicOneApi.Authentication;
+using RicOneApi.Common.Rest;
 
 /*
  * Author      Andrew Pieniezny <andrew.pieniezny@neric.org>
@@ -27,26 +29,28 @@ namespace RicOneApi.Api
         private readonly XEmploymentsObject xEmploymentsObject;
         private readonly GetLastPageObject getLastPageObject;
         private readonly AUPPObject aUPPObject;
+        private readonly HeaderRequest headerRequest;
 
         /// <summary>
         /// Class that allows access to the xPress data model objects.
         /// </summary>
         /// <param name="baseApiUrl">The base URL for an API endpoint.</param>
-        public XPress(string baseApiUrl)
+        public XPress(Endpoint endpoint)
         {
-            RestClient rc = new RestClient(baseApiUrl);
+            RestClient rc = new RestClient(endpoint.Href);
             rc.AddDefaultHeader("Content-Type", "application/json");
-            xLeasObject = new XLeasObject(rc, baseApiUrl);
-            xSchoolsObject = new XSchoolsObject(rc, baseApiUrl);
-            xCalendarsObject = new XCalendarsObject(rc, baseApiUrl);
-            xCoursesObject = new XCoursesObject(rc, baseApiUrl);
-            xRostersObject = new XRostersObject(rc, baseApiUrl);
-            xStaffsObject = new XStaffsObject(rc, baseApiUrl);
-            xStudentsObject = new XStudentsObject(rc, baseApiUrl);
-            xContactsObject = new XContactsObject(rc, baseApiUrl);
-            xEmploymentsObject = new XEmploymentsObject(rc, baseApiUrl);
-            getLastPageObject = new GetLastPageObject(rc, baseApiUrl);
-            aUPPObject = new AUPPObject(rc, baseApiUrl);
+            xLeasObject = new XLeasObject(rc, endpoint);
+            xSchoolsObject = new XSchoolsObject(rc, endpoint);
+            xCalendarsObject = new XCalendarsObject(rc, endpoint);
+            xCoursesObject = new XCoursesObject(rc, endpoint);
+            xRostersObject = new XRostersObject(rc, endpoint);
+            xStaffsObject = new XStaffsObject(rc, endpoint);
+            xStudentsObject = new XStudentsObject(rc, endpoint);
+            xContactsObject = new XContactsObject(rc, endpoint);
+            xEmploymentsObject = new XEmploymentsObject(rc, endpoint);
+            getLastPageObject = new GetLastPageObject(rc, endpoint);
+            aUPPObject = new AUPPObject(rc, endpoint);
+            headerRequest = new HeaderRequest(rc, endpoint);
         }
 
         # region xLeas
@@ -3533,6 +3537,7 @@ namespace RicOneApi.Api
         /// <param name="servicePath">The requested service path.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>Integer value.</returns>
+        [Obsolete("As of version 1.8.0, use GetHeaders().NavigationLastPage.")]
         public int GetLastPage(ServicePath servicePath, int? navigationPageSize)
         {
             return getLastPageObject.GetLastPage(servicePath, navigationPageSize);
@@ -3545,6 +3550,7 @@ namespace RicOneApi.Api
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>Integer value.</returns>
+        [Obsolete("As of version 1.8.0, use GetHeaders().NavigationLastPage.")]
         public int GetLastPage(ServicePath servicePath, int? navigationPageSize, int? schoolYear)
         {
             return getLastPageObject.GetLastPage(servicePath, navigationPageSize, schoolYear);
@@ -3557,6 +3563,7 @@ namespace RicOneApi.Api
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
         /// <returns></returns>
+        [Obsolete("As of version 1.8.0, use GetHeaders().NavigationLastPage.")]
         public int GetLastPage(ServicePath servicePath, int? navigationPageSize, string opaqueMarker)
         {
             return getLastPageObject.GetLastPage(servicePath, navigationPageSize, opaqueMarker);
@@ -3569,6 +3576,7 @@ namespace RicOneApi.Api
         /// <param name="refId">RefId of xObject.</param>
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <returns>Integer value.</returns>
+        [Obsolete("As of version 1.8.0, use GetHeaders().NavigationLastPage.")]
         public int GetLastPage(ServicePath servicePath, string refId, int? navigationPageSize)
         {
             return getLastPageObject.GetLastPage(servicePath, refId, navigationPageSize);
@@ -3582,6 +3590,7 @@ namespace RicOneApi.Api
         /// <param name="navigationPageSize">Number of resources to retrieve.</param>
         /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
         /// <returns>Integer value.</returns>
+        [Obsolete("As of version 1.8.0, use GetHeaders().NavigationLastPage.")]
         public int GetLastPage(ServicePath servicePath, string refId, int? navigationPageSize, int? schoolYear)
         {
             return getLastPageObject.GetLastPage(servicePath, refId, navigationPageSize, schoolYear);
@@ -3715,6 +3724,83 @@ namespace RicOneApi.Api
         //{
         //    return aUPPObject.GetXContactUsers(refId, navigationPage, navigationPageSize);
         //}
+        #endregion
+
+        #region GetHeaders
+        /// <summary>
+        /// Makes a HEAD request to return the header, status code, status message, navigation last page, and record count for a service path with paging.
+        /// </summary>
+        /// <param name="servicePath">The requested service path.</param>
+        /// <returns>HeaderResponse</returns>
+        public HeaderResponse GetHeaders(ServicePath servicePath)
+        {
+            return headerRequest.GetHeaders(servicePath);
+        }
+        /// <summary>
+        /// Makes a HEAD request to return the header, status code, status message, navigation last page, and record count for a service path with paging.
+        /// </summary>
+        /// <param name="servicePath">The requested service path.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <returns>HeaderResponse</returns>
+        public HeaderResponse GetHeaders(ServicePath servicePath, int? navigationPageSize)
+        {
+            return headerRequest.GetHeaders(servicePath, navigationPageSize);
+        }
+        /// <summary>
+        /// Makes a HEAD request to return the header, status code, status message, navigation last page, and record count for a service path with paging by school year.
+        /// </summary>
+        /// <param name="servicePath">The requested service path.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>HeaderResponse</returns>
+        public HeaderResponse GetHeaders(ServicePath servicePath, int? navigationPageSize, int? schoolYear)
+        {
+            return headerRequest.GetHeaders(servicePath, navigationPageSize, schoolYear);
+        }
+        /// <summary>
+        /// Makes a HEAD request to return the header, status code, status message, navigation last page, and record count for a service path from a given point with paging.
+        /// </summary>
+        /// <param name="servicePath">The requested service path.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="opaqueMarker">Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.</param>
+        /// <returns>HeaderResponse</returns>
+        public HeaderResponse GetHeaders(ServicePath servicePath, int? navigationPageSize, string opaqueMarker)
+        {
+            return headerRequest.GetHeaders(servicePath, navigationPageSize, opaqueMarker);
+        }
+        /// <summary>
+        /// Makes a HEAD request to return the header, status code, status message, navigation last page, and record count for a service path.
+        /// </summary>
+        /// <param name="servicePath">The requested service path.</param>
+        /// <param name="refId">RefId of xObject.</param>
+        /// <returns>HeaderResponse</returns>        
+        public HeaderResponse GetHeaders(ServicePath servicePath, string refId)
+        {
+            return headerRequest.GetHeaders(servicePath, refId);
+        }
+        /// <summary>
+        /// Makes a HEAD request to return the header, status code, status message, navigation last page, and record count for a service path with paging.
+        /// </summary>
+        /// <param name="servicePath">The requested service path.</param>
+        /// <param name="refId">RefId of xObject.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <returns>HeaderResponse</returns>
+        public HeaderResponse GetHeaders(ServicePath servicePath, string refId, int? navigationPageSize)
+        {
+            return headerRequest.GetHeaders(servicePath, refId, navigationPageSize);
+        }
+        /// <summary>
+        /// Makes a HEAD request to return the header, status code, status message, navigation last page, and record count for a service path with paging by school year.
+        /// </summary>
+        /// <param name="servicePath">The requested service path.</param>
+        /// <param name="refId">RefId of xObject.</param>
+        /// <param name="navigationPageSize">Number of resources to retrieve.</param>
+        /// <param name="schoolYear">The year of the requested data (i.e. 2018 for the 2017-2018 school year).</param>
+        /// <returns>HeaderResponse</returns>
+        public HeaderResponse GetHeaders(ServicePath servicePath, string refId, int? navigationPageSize, int? schoolYear)
+        {
+            return headerRequest.GetHeaders(servicePath, refId, navigationPageSize, schoolYear);
+        }
         #endregion
     }
 }

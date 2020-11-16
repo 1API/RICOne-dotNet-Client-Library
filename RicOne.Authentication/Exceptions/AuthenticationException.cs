@@ -6,7 +6,7 @@
  * Version     1.0.0
  * Since       4/20/2020
  */
-namespace RicOne.Authentication.Exceptions
+namespace RicOneApi.Authentication.Exceptions
 {
     public class AuthenticationException : Exception
     {

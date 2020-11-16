@@ -1,7 +1,6 @@
 ﻿using RestSharp;
 using RestSharp.Authenticators;
 using RicOneApi.Api;
-using RicOneApi.Models.Authentication;
 using RicOneApi.Models.XPress;
 using System;
 using System.Linq;
@@ -18,6 +17,36 @@ namespace RicOneApi.Common.Rest
     /// </summary>
     class RestReturn
     {
+        internal HeaderResponse HeadRequest(RestClient rc, RestProperties rp)
+        {
+            RestRequest request = RequestBuilder(rc, rp);
+            HeaderResponse headerResponse = new HeaderResponse();
+            var response = rc.Execute<HeaderResponse>(request, Method.HEAD);
+
+            headerResponse.Header = Util.BuildHeader(response);
+            headerResponse.StatusCode = (int)response.StatusCode;
+            headerResponse.Message = response.StatusCode.ToString();
+
+            if (rp.RestHeader.HasPaging())
+            {
+                headerResponse.NavigationLastPage = int.Parse(response.Headers.ToList()
+                .Find(x => x.Name.Equals("NavigationLastPage", StringComparison.CurrentCultureIgnoreCase))
+                .Value.ToString());
+
+                headerResponse.RecordCount = int.Parse(response.Headers.ToList()
+                .Find(x => x.Name.Equals("NavigationCount", StringComparison.CurrentCultureIgnoreCase))
+                .Value.ToString());
+            }
+            else
+            {
+                headerResponse.RecordCount = int.Parse(response.Headers.ToList()
+                .Find(x => x.Name.Equals("X-Record-Count", StringComparison.CurrentCultureIgnoreCase))
+                .Value.ToString());
+            }
+
+            return headerResponse;
+        }
+
         /// <summary>
         /// Generic REST call for list objects.
         /// </summary>
@@ -28,10 +57,8 @@ namespace RicOneApi.Common.Rest
         /// <returns>Multiple object response for a REST call.</returns>
         internal ResponseMulti<E> MakeAllRequest<E,T>(RestClient rc, RestProperties rp) where T : ICollectionType<E,T>, new()
         {
-            Authenticator.Instance.RefreshToken(Authenticator.Instance.GetToken(), rc);
-
             ResponseMulti<E> output = new ResponseMulti<E>();
-            RestRequest request = RequestBuilder(rp);
+            RestRequest request = RequestBuilder(rc, rp);
 
             var response = rc.Execute<T>(request);
 
@@ -47,7 +74,7 @@ namespace RicOneApi.Common.Rest
                 output.Json = response.Content;
                 output.Xml = Util.ConvertJson2Xml(response.Content);
                 output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
+                output.Message = response.StatusCode.ToString();
                 output.Header = Util.BuildHeader(response);
             }
             catch (Exception)
@@ -56,7 +83,7 @@ namespace RicOneApi.Common.Rest
                 output.Json = null;
                 output.Xml = null;
                 output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
+                output.Message = response.StatusCode.ToString();
                 output.Header = Util.BuildHeader(response);
             }
             return output;
@@ -72,10 +99,8 @@ namespace RicOneApi.Common.Rest
         /// <returns>Single object response for a REST call.</returns>
         internal ResponseSingle<E> MakeSingleRequest<E,T>(RestClient rc, RestProperties rp) where T : ICollectionType<E,T>, new()
         {
-            Authenticator.Instance.RefreshToken(Authenticator.Instance.GetToken(), rc);
-
             ResponseSingle<E> output = new ResponseSingle<E>();
-            RestRequest request = RequestBuilder(rp);
+            RestRequest request = RequestBuilder(rc, rp);
             var response = rc.Execute<T>(request);
 
             try
@@ -84,7 +109,7 @@ namespace RicOneApi.Common.Rest
                 output.Json = response.Content;
                 output.Xml = Util.ConvertJson2Xml(response.Content);
                 output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
+                output.Message = response.StatusCode.ToString();
                 output.Header = Util.BuildHeader(response);
             }
             catch (Exception)
@@ -93,7 +118,7 @@ namespace RicOneApi.Common.Rest
                 output.Json = null;
                 output.Xml = null;
                 output.StatusCode = (int)response.StatusCode;
-                output.Message = response.StatusDescription;
+                output.Message = response.StatusCode.ToString();
                 output.Header = Util.BuildHeader(response);
             }
             return output;
@@ -105,10 +130,10 @@ namespace RicOneApi.Common.Rest
         /// </summary>
         /// <param name="rp">REST properties for request.</param>
         /// <returns>The request with appropriate headers and query parameters.</returns>
-        private RestRequest RequestBuilder(RestProperties rp)
+        private RestRequest RequestBuilder(RestClient rc, RestProperties rp)
         {
+            rc.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(rp.Endpoint.Token, "Bearer");
             RestRequest request = new RestRequest(rp.ServicePath.GetServicePath(), Method.GET);
-            //request.AddHeader("Accept", "application/json");
 
             if (!string.IsNullOrEmpty(rp.RefId))
             {
@@ -160,5 +185,11 @@ namespace RicOneApi.Common.Rest
         /// Accessor method that holds navigation last page integer value.
         /// </summary>
         internal int NavigationLastPage { get; set; }
+
+        //private void WillTokenExpire(RestProperties rp)
+        //{
+        //    rp.Endpoint.Token;
+        //    rp.Endpoint.DecodedToken.Token;
+        //}
     }
 }
